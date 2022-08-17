@@ -1,0 +1,41 @@
+{
+  "name": "vanilla_app",
+  "version": "1.0.0",
+  "description": "App to showoff Web Components amazing abilities. Frameworkless!",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "dev": "NODE_ENV=development rollup -c -w",
+    "dev:server": "NODE_ENV=development node dist/server/index.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^7.0.0",
+    "@fastify/static": "^6.5.0",
+    "fastify": "^4.4.0",
+    "ky": "^0.31.1",
+    "lit": "^2.3.0",
+    "lit-element": "^3.2.2",
+    "router-slot": "^1.5.5"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.4",
+    "@types/node": "^18.7.6",
+    "@web/rollup-plugin-copy": "^0.3.0",
+    "@web/rollup-plugin-html": "^1.10.3",
+    "chokidar": "^3.5.3",
+    "rollup": "^2.78.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-minify-html-literals": "^1.2.6",
+    "rollup-plugin-summary": "^1.4.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-lit-plugin": "^1.2.1",
+    "typescript": "^4.7.4"
+  }
+}

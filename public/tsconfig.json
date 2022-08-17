@@ -1,0 +1,36 @@
+{
+	"compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "../dist/intermediate",
+    "paths": {
+      "src":["src"],
+      "$client/*": ["src/client/*"],
+      "$components/*": ["src/components/*"],
+      "$pages/*": ["src/pages/*"]
+    },
+    "moduleResolution": "Node16",
+    "target": "ES2020",
+    "module": "ES2020",
+    "lib": ["es2020", "dom"],
+    "declaration": true,
+    "declarationMap": true,
+    "useDefineForClassFields": false,
+		"experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		// "strict": true,
+    "plugins": [
+      {
+        "name": "ts-lit-plugin",
+        "strict": true
+      }
+    ]
+  },
+  "include": ["**/*.d.ts", "**/*.ts", "**/*.js"]
+}

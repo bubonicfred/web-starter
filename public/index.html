@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Vanilla App</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+		<link rel="stylesheet" href="static/bulma/bulma.css" />
+		<link rel="stylesheet" href="static/global.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/">
+	</head>
+	<body>
+    <layout>
+      <header slot="header">
+        <app-navigation></app-navigation>
+      </header>
+      <main slot="body">
+        <div id="router-container">
+          <router-slot></router-slot>
+        </div>
+      </main>
+    </layout>
+    <script src="../dist/intermediate/index.js" type="module"></script>
+    </script>
+	</body>
+</html>

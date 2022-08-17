@@ -41,6 +41,12 @@ export default class ApiCallElement extends LitElement {
   @property()
   state = "IDLE";
 
+  override connectedCallback() {
+    super.connectedCallback()
+  
+    document.title = "Api Call";
+  }
+
   override render() {
 
     const dataDisplay = (this.data) ? html`<div>Output was: ${JSON.stringify(this.data)}</div>` : html`<h6>Nothing to show yet</h6>`;

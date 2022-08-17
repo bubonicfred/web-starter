@@ -37,6 +37,12 @@ export default class MyElement extends LitElement {
   @property({type: Number})
   count = 0;
 
+  override connectedCallback() {
+    super.connectedCallback()
+  
+    document.title = "My Element";
+  }
+
   override render() {
     return html`
       <h1>${this.sayHello(this.name)}!</h1>

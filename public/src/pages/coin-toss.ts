@@ -31,6 +31,12 @@ export default class CoinTossElement extends LitElement {
   @state()
   private tosses = tossCoins(10);
 
+  override connectedCallback() {
+    super.connectedCallback()
+  
+    document.title = "Coin Toss";
+  }
+
   render() {
 
     return html`

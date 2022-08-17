@@ -9,6 +9,7 @@ export default [
   {
     path: "home",
     component: () => {
+      document.title = "Home";
       // Manually create the home page 
       const $div = document.createElement("div");
       $div.innerText = `🏠 This is the home page!`;
@@ -18,6 +19,7 @@ export default [
   {
     path: "settings",
     component: () => {
+      document.title = "Settings";
       // Manually create the settings page 
       const $div = document.createElement("div");
       $div.innerText = `⚙️ This is the settings page!`;

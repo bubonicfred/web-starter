@@ -1,9 +1,28 @@
-// Define a web component
-export default class MyPage extends HTMLElement {
+import {LitElement, html, css} from "lit";
+import {customElement, eventOptions, property} from "lit/decorators.js";
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "my-page": MyPage;
+  }
+}
+
+
+export default class MyPage extends LitElement {
   constructor () {
     super();
-    const shadow = this.attachShadow({mode: "open"});
-    shadow.appendChild(document.createTextNode("🎁 This is a custom element!"));
+  }
+
+  override connectedCallback() {
+    super.connectedCallback()
+  
+    document.title = "MY Page";
+  }
+
+  override render() {
+    return html`
+      <span>"🎁 This is a custom element!"</span>
+    `;
   }
 }
 

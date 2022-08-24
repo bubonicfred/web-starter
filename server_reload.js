@@ -13,8 +13,12 @@ function toExit () {
   }
 }
 
-export function serve (serverFilePath) {
+export function serve (serverFilePath, cwd, env) {
 
+  if(!cwd) {
+    cwd = "dist";
+  }
+  
   if(!server.process) {
     process.on("SIGTERM", toExit);
     process.on("exit", toExit);
@@ -31,6 +35,8 @@ export function serve (serverFilePath) {
         stdio: ["ignore", "inherit", "inherit"],
         shell: true,
         detached: false,
+        cwd,
+        env: Object.assign({}, process.env, env,),
       });
     },
   }

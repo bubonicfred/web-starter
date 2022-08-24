@@ -1,17 +1,27 @@
-import commonjs from "@rollup/plugin-commonjs";
-import typescript from "@rollup/plugin-typescript";
-import html from "@web/rollup-plugin-html";
-import {copy} from "@web/rollup-plugin-copy";
 import resolve from "@rollup/plugin-node-resolve";
+import html from "@web/rollup-plugin-html";
+import builtinModules from "builtin-modules";
+import path from "path";
+import postcssImport from "postcss-import";
+import copy from "rollup-plugin-copy";
 import del from "rollup-plugin-delete";
+import typescript from "rollup-plugin-esbuild";
+import { folderInput } from "rollup-plugin-folder-input";
+import gzipPlugin from "rollup-plugin-gzip";
 import livereload from "rollup-plugin-livereload";
 import minifyHTML from "rollup-plugin-minify-html-literals";
-import {terser} from "rollup-plugin-terser";
+import postcss from "rollup-plugin-postcss";
 import summary from "rollup-plugin-summary";
+import {terser} from "rollup-plugin-terser";
+import tsPaths from "rollup-plugin-typescript-paths";
+
 import {serve} from "./server_reload.js";
 
+const pkg = require("./package.json");
+
 const dev = process.env.NODE_ENV === "development";
-const serverFilePath = "dist/server/index.mjs";
+const serverFilePath = "server/index.js";
+const distDir = path.resolve(path.dirname(module.filename), "dist");
 
 export default [
   {
@@ -20,6 +30,8 @@ export default [
         console.error(`(!) ${warning.message}`);
       }
     },
+    external: [...Object.keys(pkg.dependencies).map((val) => new RegExp(`${val}(/.*)?`)), ...builtinModules],
+    "preserveEntrySignatures": "strict",
     "input": "public/src/index.ts",
     "output": {
       "dir": "dist/intermediate",
@@ -29,12 +41,15 @@ export default [
       del({
         "targets": "dist/intermediate/*"
       }),
-      commonjs(),
+      resolve({
+        preferBuiltins: true
+      }),
+      tsPaths({
+        "tsConfigPath": "public/tsconfig.json",
+        "preserveExtensions": true,
+      }),
       typescript({
         "tsconfig": "public/tsconfig.json", 
-      }),
-      resolve({
-        browser: true,
       }),
       !dev && terser(),
     ],
@@ -42,7 +57,7 @@ export default [
       "chokidar": {
       },
       "include": ["public/**"],
-      "exclude": ['node_modules/**'],
+      "exclude": ["node_modules/**"],
       "clearScreen": false,
     },
   },
@@ -52,21 +67,23 @@ export default [
         console.error(`(!) ${warning.message}`);
       }
     },
-    output: {
+    external: [],
+    "preserveEntrySignatures": "strict",
+    "output": {
       "dir": "dist/serve",
       "sourcemap": !dev,
     },
-    preserveEntrySignatures: "strict",
     plugins: [
       del({
-        "targets": "dist/serve/*"
+        "targets": "dist/serve/*",
+        ignore: ["dist/serve/static"]
       }),
       html({
         input: "public/index.html",
+        "extractAssets": false,
+        "minify": !dev,
       }),
-      resolve({
-        browser: true,
-      }),
+      resolve({}),
       !dev && minifyHTML(),
       !dev && terser({
         ecma: 2020,
@@ -74,9 +91,7 @@ export default [
         warnings: true,
       }),
       summary(),
-      // copy({
-      //   patterns: ["images/**/*"],
-      // }),
+			!dev && gzipPlugin(),
       dev && livereload({
         "verbose": true,
         "watch": ["dist/serve"],
@@ -86,8 +101,37 @@ export default [
     "watch": {
       "chokidar": {
       },
-      "include": ["dist/**"],
-      "exclude": ['node_modules/**'],
+      "include": ["dist/**", "public/index.html"],
+      "exclude": ["node_modules/**"],
+      "clearScreen": false,
+    },
+  },
+  {
+    input: 'public/global.css',
+    output: {
+      file: 'dist/serve/static/global.css',
+      format: 'es'
+    },
+    plugins: [
+      del({
+        "targets": "dist/serve/static/*",
+      }),
+      postcss({
+        extract: true,
+        plugins: [
+          postcssImport({}),
+        ],
+      }),
+      copy({
+        targets: [
+          { src: "public/static/**/*", dest: "dist/serve/static" },
+        ]
+      }),
+    ],
+    "watch": {
+      "chokidar": {
+      },
+      "include": ["public/global.css"],
       "clearScreen": false,
     },
   },
@@ -97,27 +141,42 @@ export default [
         console.error(`(!) ${warning.message}`);
       }
     },
-    "input": "private/src/index.mts",
+    external: [...Object.keys(pkg.dependencies).map((val) => new RegExp(`${val}(/.*)?`)), ...builtinModules],
+    "input": "private/src/**/*.ts",
     "output": {
       "dir": "dist/server",
       "sourcemap": !dev,
       "format": "esm",
-      "entryFileNames": "[name].mjs"
     },
     "plugins": [
       del({
         "targets": "dist/server/*"
       }),
-      typescript({
-        "tsconfig": "private/tsconfig.json", 
+			copy({
+				targets: [
+					{"src": "config", "dest": distDir},
+					{"src": "../project_spec.yaml", "dest": distDir},
+				]
+			}),
+      folderInput(),
+      resolve({
+        "modulesOnly": false,
       }),
-      dev && serve(serverFilePath),
+      tsPaths({
+        "tsConfigPath": "private/tsconfig.json",
+        "preserveExtensions": true,
+      }),
+      typescript({
+        "tsconfig": "private/tsconfig.json",
+        exclude: ["node_modules/**/*"],
+      }),
+      dev && serve(serverFilePath, undefined, process.env),
     ],
     "watch": {
       "chokidar": {
       },
       "include": ["private/**"],
-      "exclude": ['node_modules/**'],
+      "exclude": ["node_modules/**"],
       "clearScreen": false,
     },
   },

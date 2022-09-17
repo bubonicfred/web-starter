@@ -15,7 +15,7 @@ To install `npm i` or `yarn install`
 
 To run: `npm run dev` or `yarn build`
 
-VSCode has a lit-html extension.
+VSCode has a [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin) extension.
 
 ## Directories
 
@@ -33,3 +33,4 @@ dist/server - Just run index.js in production.
 
 - For production. You'll have to think about whether you want fastify or nginx (etc.) to serve static content. With the current setup, fastify serves static content only in dev mode.
     - nginx, apache, fastify, etc. can point to "dist/serve" to serve static content. index.html must be served when no match.
+    - An example nginx config is provided

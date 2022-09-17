@@ -8,13 +8,6 @@ declare global {
   }
 }
 
-/**
-* An example element.
-*
-* @fires count-changed - Indicates when the count changes
-* @slot - This element has a slot
-* @csspart button - The button
-*/
 @customElement("api-call")
 export default class ApiCallElement extends LitElement {
   static override styles = css`

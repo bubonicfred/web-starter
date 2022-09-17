@@ -7,13 +7,6 @@ declare global {
   }
 }
 
-/**
-* An example element.
-*
-* @fires count-changed - Indicates when the count changes
-* @slot - This element has a slot
-* @csspart button - The button
-*/
 @customElement("my-element")
 export default class MyElement extends LitElement {
   static override styles = css`

@@ -1,5 +1,5 @@
 import {LitElement, html, css} from "lit";
-import {customElement, eventOptions, property, state} from "lit/decorators.js";
+import {customElement, state} from "lit/decorators.js";
 import {asyncAppend} from 'lit/directives/async-append.js';
 
 declare global {
@@ -39,7 +39,6 @@ export default class CoinTossElement extends LitElement {
 
   render() {
 
-    return html`
-      <ul>${asyncAppend(this.tosses, (v: string, idx) => html`<li>Toss ${idx + 1}: ${v}</li>`)}</ul>`;
+    return html`<ul>${asyncAppend(this.tosses, (v: string, idx) => html`<li>Toss ${idx + 1}: ${v}</li>`)}</ul>`;
   }
 }

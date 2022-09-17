@@ -1,3 +1,5 @@
+import type { IRoute } from "router-slot";
+
 import MyPage from "./pages/my-page.js";
 
 export default [
@@ -48,4 +50,4 @@ export default [
     path: "**",
     redirectTo: "home"
   }
-];
+] as IRoute[];

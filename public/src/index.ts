@@ -6,4 +6,3 @@ import routes from "./routes.js";
 // Setup the router
 const routerSlot = document.querySelector("router-slot")!;
 routerSlot.add(routes);
-console.log("lol2sssaa9001060")

@@ -7,13 +7,6 @@ declare global {
   }
 }
 
-/**
-* An example element.
-*
-* @fires count-changed - Indicates when the count changes
-* @slot - This element has a slot
-* @csspart button - The button
-*/
 @customElement("app-navigation")
 export default class NavigationElement extends LitElement {
   static override styles = css`

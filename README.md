@@ -1,6 +1,6 @@
-# Framework less Vanilla HTML/JS/CSS SPA Website
+# Framework-less Vanilla HTML/JS/CSS SPA Website
 
-SPA Web Components Web App. Showcases Lit, which is tiny html element builder, awesome and a game changer for web components. "Web Components is dead" is highly exaggerated and total garbo. It is the future.
+SPA Web Components Web App starter. Showcases Lit, which is an awesome tiny html element builder and a game changer for web components. "Web Components is dead" is highly exaggerated and total garbo. It is the future.
 
 - Frameworkless. Thank the heavens!
 - High Performance. "Performant" is not enough.
@@ -8,6 +8,7 @@ SPA Web Components Web App. Showcases Lit, which is tiny html element builder, a
 - Consistent builds. No difference between dev and prod except compression/etc.
 - Server and client reloads on changes.
 - Flexible. Bring your own html element builder, router, test framework, web server and whatever you want.
+- Typescript enabled.
 
 ## Getting Started
 
@@ -19,7 +20,7 @@ VSCode has a [lit-plugin](https://marketplace.visualstudio.com/items?itemName=ru
 
 ## Directories
 
-private - Server side app. Web server
+private - Server side app. Web server.
 
 public - Client side app.
 

@@ -12,7 +12,7 @@ import livereload from "rollup-plugin-livereload";
 import minifyHTML from "rollup-plugin-minify-html-literals";
 import postcss from "rollup-plugin-postcss";
 import summary from "rollup-plugin-summary";
-import {terser} from "rollup-plugin-terser";
+import terser from '@rollup/plugin-terser';
 import tsPaths from "rollup-plugin-typescript-paths";
 
 import {serve} from "./server_reload.js";

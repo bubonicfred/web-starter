@@ -30,7 +30,7 @@
     "eslint": "^8.21.0",
     "postcss": "^8.4.14",
     "postcss-import": "^15.0.0",
-    "rollup": "^2.78.0",
+    "rollup": "^3.0.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-esbuild": "^5.0.0",

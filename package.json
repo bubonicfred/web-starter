@@ -39,7 +39,7 @@
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-minify-html-literals": "^1.2.6",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-summary": "^1.4.3",
+    "rollup-plugin-summary": "^2.0.0",
     "rollup-plugin-typescript-paths": "normano/rollup-plugin-typescript-paths",
     "ts-lit-plugin": "^1.2.1",
     "tslib": "^2.4.0",
